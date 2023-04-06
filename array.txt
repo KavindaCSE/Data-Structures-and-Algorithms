@@ -1,0 +1,111 @@
+#include <iostream>
+#include<array>
+#include <chrono>
+using namespace std;
+using namespace std::chrono;
+
+
+
+class stack{
+public:
+
+    int top = -1;
+    int length = 10;
+    int list[10] = {};
+    int x = 0;
+
+
+    void Push(int n){
+      if(length == top){
+        cout<< "Stack is filled.";
+      }
+      else{
+        top ++;
+        x++ ;
+        list[top]= n;
+      }  
+
+    }
+    void pop(){
+        if (top == -1){
+
+        }
+        else{
+            int t = top;
+            top --;
+            x-- ;
+            cout<< list[t]<< endl;
+                        
+        }
+    }
+
+    void isEmpty(){
+        if (top == -1){
+            cout<< "Stack is empty";
+        }
+        else{
+            cout<< "Stack is not empty.";
+        }
+    }
+
+    void isFull(){
+        if (top + 1 == length){
+            cout << "Stack is full.";
+        }
+        else{
+            cout<< "Stack is not full.";
+        }
+    }
+
+    void Stack_top(){
+        if (top == -1){
+
+        }
+        else{
+            cout<< list[top];
+        }
+    }
+
+    void Display(){
+        for (int i = 0; i < x ; i++){
+            cout<< list[i]<<" ";
+        }
+      cout << ""<<endl;
+    }
+
+};
+
+int main (){
+    stack st1 ;
+    auto start = high_resolution_clock::now();
+    st1.Push(8);
+    st1.Push(10);
+    st1.Push(5);
+    st1.Push(11);
+    st1.Push(15);
+    st1.Push(23);
+    st1.Push(6);
+    st1.Push(18);
+    st1.Push(20);
+    st1.Push(17);
+    st1.Display();
+    st1.pop();
+    st1.pop();
+    st1.pop();
+    st1.pop();
+    st1.pop();
+    st1.Display();
+    st1.Push(4);
+    st1.Push(30);
+    st1.Push(3);
+    st1.Push(1);
+    st1.Display();
+
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+
+    cout << "Time taken by function: "
+    << duration.count() << " microseconds" << endl;
+
+    return 0;
+}
