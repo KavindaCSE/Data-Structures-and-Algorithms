@@ -66,7 +66,7 @@ struct HashTable{
             cout << "The user does not exist";
         }
         else{
-            password->search(user_name);
+            password[hash].search(user_name);
         }
     }
 };
