@@ -1,0 +1,64 @@
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+void MST(vector<vector<int>> graph) {
+    int firstV = 0;
+
+    int mst[6][6];
+
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 6; j++) {
+            mst[i][j] = 0;
+        }
+    }
+
+    bool isVisited[6] = {false, false, false, false, false, false};
+
+    vector<int> queue;
+
+    queue.push_back(firstV);
+
+    isVisited[firstV] = true;
+
+    int k = 1;
+
+    while (k < 6) {
+        int cheapest = 99999;
+
+        int v1;
+
+        int v2;
+
+        for (int v: queue) {
+            for (int i = 0; i < graph.size(); i++) {
+                if (!isVisited[i] && graph[v][i] < cheapest && graph[v][i] != 0) {
+                    cheapest = graph[v][i];
+                    v1 = v;
+                    v2 = i;
+                }
+            }
+        }
+
+        mst[v1][v2] = cheapest;
+        mst[v2][v1] = cheapest;
+        isVisited[v2] = true;
+        queue.push_back(v2);
+        k++;
+    }
+
+    for (int i = 0; i < 6; i ++) {
+        for (int j = 0; j < 6; j++) {
+            cout << mst[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+
+int main() {
+    vector<vector<int>> graph = {{0, 3,  0, 0, 0,  1},{3, 0,  2, 1, 10, 0},{0, 2,  0, 3, 0,  5},{0, 1,  3, 0, 5,  0},{0, 10, 0, 5, 0,  4},{1, 0,  5, 0, 4,  0}};
+
+    MST(graph);
+}
